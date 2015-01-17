@@ -44,12 +44,13 @@ var client = {
         this.socket.emit("addGame", {id: this.id});
     },
 
-    put: function(x,y) {
+    put: function(x,y, type) {
 
         socket.emit("put", {
             id: this.id,
             x: x,
-            y: y
+            y: y,
+            type: type
         });
     },
 
