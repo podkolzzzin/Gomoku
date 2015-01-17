@@ -4,7 +4,7 @@
 var server = {
 
     io: null,
-    games: [{hello: "world"}],
+    games: [],
     clients: [],
 
     bind: function (io) {
