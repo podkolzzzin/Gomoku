@@ -18,7 +18,7 @@ var getCellSelector = function (cx, cy, add_class) {
     return (add_class ? '.' : '') + 'cell-' + cx + '-' + cy;
 };
 var getOppositeTurn = function (turn) {
-    return 0x3 - turn;
+    return game.TURN_CROSS + game.TURN_NOUGHT - turn;
 };
 
 game.initField = function () {
