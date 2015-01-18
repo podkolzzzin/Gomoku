@@ -1,9 +1,30 @@
+body {
+    margin: 0;
+    font-family: Tahoma;
+}
+
+.page {
+    width: 800px;
+    margin: 0 auto;
+}
+
 .menu-layout {
+    display: none;
+}
+
+.identification-layout {
+    width: 800px;
+    text-align: center;
+}
+
+.identification-layout h1 {
 
 }
 
 .games-layout {
-
+    width: 366px;
+    padding: 15px;
+    display: inline-block;
 }
 
 .games {
@@ -12,10 +33,38 @@
 
 .game {
     padding: 15px;
-    background: rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.create-game-layout {
+    width: 399px;
+    display: inline-block;
+    text-align: center;
+}
+
+.create-game {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 15px 25px;
+    font-family: Tahoma;
+    font-size: 15px;
+    border-radius: 48px;
+    color: rgba(0, 0, 0, 0.65);
+    -webkit-transition: all 250ms cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 250ms cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.create-game:hover {
+    color: rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+}
+
+.create-game:focus {
+    outline: none;
 }
 
 .game-field {
+    display: none;
     width: 589px;
     height: 589px;
     cursor: pointer;

@@ -11,13 +11,15 @@ var client = {
     get_games_callback: null,
     on_put_callback: null,
     on_join_callback: null,
+    player_left_callback: null,
 
     create: function (ip, callback) {
-        this.socket = io('http://' + ip + ':8080');
+        this.socket = io('//' + ip + ':8080');
         this.socket.on("initial", this.onInitial);
         this.socket.on("getGames", this.onGetGames);
         this.socket.on("gameAdded", this.onGameAdded);
         this.socket.on("put", this.onPut);
+        this.socket.on("playerLeft", this.onPlayerLeft);
         this.callback = callback;
     },
 
@@ -27,12 +29,33 @@ var client = {
         if (client.callback) {
             client.callback(client.id);
         }
+
+        client.callback = null;
+    },
+
+    addOnPlayerLeftCallback: function (callback) {
+        this.player_left_callback = callback;
+    },
+
+    // data empty
+    onPlayerLeft: function (data) {
+        console.log("opponent left");
+        if (client.player_left_callback) {
+            client.player_left_callback();
+        }
+        client.player_left_callback = null;
+    },
+
+    // only host sends it
+    finishGame: function () {
+        this.socket.emit("finishGame", {gameId: gameId});
     },
 
     onGetGames: function (data) {
         if (client.get_games_callback) {
             client.get_games_callback(data);
         }
+        client.get_games_callback = null;
     },
 
     addOnJoinGameCallback: function (callback) {

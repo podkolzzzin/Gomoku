@@ -18,7 +18,7 @@ var getCellSelector = function (cx, cy, add_class) {
     return (add_class ? '.' : '') + 'cell-' + cx + '-' + cy;
 };
 var getOppositeTurn = function (turn) {
-    return 0x3 - turn;
+    return game.TURN_CROSS + game.TURN_NOUGHT - turn;
 };
 
 game.initField = function () {
@@ -128,6 +128,10 @@ game.checkVictory = function () {
     var ltr = _hasDiagonalVictory(true, false) || _hasDiagonalVictory(false, false);
     var rtl = _hasDiagonalVictory(true, true) || _hasDiagonalVictory(false, true);
     var winner = vertical || horizontal || ltr || rtl;
+
+    if (winner) {
+        client.finishGame();
+    }
 
     if (winner === game.my_turn) {
         console.log('you win!');
