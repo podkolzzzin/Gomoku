@@ -47,7 +47,7 @@ main.createGame = function () {
 };
 
 $(function () {
-    client.create("192.168.1.120", function () {
+    client.create("twopeoplesoftware.com", function () {
         main.initGames();
     });
 
