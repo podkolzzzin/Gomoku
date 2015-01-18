@@ -34,20 +34,28 @@ game.initField = function () {
         }
     }
 
-    $('.cell').on('click', game.putGo);
+    $('.cell').on('click', game.onCellClick);
 };
 
-game.putGo = function (event) {
+game.onCellClick = function (event) {
     var cx = +$(this).data('cx');
     var cy = +$(this).data('cy');
+    var turn = game.my_turn;
+
+    game.putGo(cx, cy, turn, client.id);
+
+    client.put(cx, cy, turn);
+};
+
+game.putGo = function (cx, cy, turn, user_id) {
     var cell = $(getCellSelector(cx, cy, true));
 
     if (!cell.hasClass('engaged')) {
         cell
             .addClass('engaged')
-            .addClass(game.my_turn)
-            .data('turn', game.my_turn)
-            .data('owner', main.userData.id);
+            .addClass(game.turn)
+            .data('turn', game.turn)
+            .data('owner', user_id);
     }
 
     game.checkVictory();
@@ -128,6 +136,6 @@ game.checkVictory = function () {
     }
 };
 
-$(function () {
+game.start = function () {
     game.initField();
-});
+};
