@@ -17,6 +17,7 @@ var client = {
         this.socket.on("initial", this.onInitial);
         this.socket.on("getGames", this.onGetGames);
         this.socket.on("gameAdded", this.onGameAdded);
+        this.socket.on("put", this.onPut);
         this.callback = callback;
     },
 
