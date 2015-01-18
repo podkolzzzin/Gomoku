@@ -72,7 +72,7 @@ var client = {
     },
 
     put: function (x, y, type) {
-        socket.emit("put", {
+        this.socket.emit("put", {
             id: this.id,
             gameId: this.gameId,
             x: x,
@@ -84,7 +84,7 @@ var client = {
 
     joinGame: function (gameId) {
         this.gameId = gameId;
-        socket.emit("joinGame", {
+        this.socket.emit("joinGame", {
             id: this.id,
             gameId: gameId
         });
