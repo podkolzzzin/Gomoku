@@ -3,3 +3,5 @@
  */
 
 var platform = {};
+
+platform.friends = [];

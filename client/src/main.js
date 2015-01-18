@@ -2,31 +2,41 @@
  * Created by chernikovalexey on 1/17/15.
  */
 
-var qs = (function (a) {
-    if (a == "") return {};
-    var b = {};
-    for (var i = 0; i < a.length; ++i) {
-        var p = a[i].split('=');
-        if (p.length != 2) continue;
-        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-    }
-    return b;
-})(window.location.search.substr(1).split('&'));
-
 var main = {};
 
 main.userData = {
-    id: 402
+    id: 402,
+    is_server: false
+};
+
+main.fadeIn = function (selector) {
+    var called = false;
+    var callback = function () {
+        if (!called) {
+            called = true;
+            $('.' + selector).fadeIn(125);
+        }
+    };
+    $('.layout').each(function () {
+        if ($(this).is(":visible")) {
+            $(this).fadeOut(125, callback);
+        }
+    });
+    if (!called) {
+        callback();
+    }
 };
 
 main.initGames = function () {
     client.getGames(function (games) {
+        console.log('got games')
+
         for (var i = 0, len = games.length; i < len; ++i) {
             var game = games[i];
             var game_div = $('<div>')
                 .addClass('game')
-                .addClass('game-' + game.id)
-                .data('id', game.id)
+                .addClass('game-' + game.gameId)
+                .data('id', game.gameId)
                 .data('creator', game.hostId);
 
             $('.games').append(game_div);
@@ -46,7 +56,9 @@ main.joinGame = function (event) {
     game.initField();
 };
 
-main.createGame = function () {
+main.createGame = function (event) {
+    main.is_server = true;
+
     client.addGame(function () {
     });
 
@@ -57,17 +69,20 @@ main.createGame = function () {
 };
 
 $(function () {
-    client.create("twopeoplesoftware.com", function () {
-        main.initGames();
-    });
+    $.getScript("src/platform_vk.js", function () {
+        client.create("twopeoplesoftware.com", function () {
+            main.fadeIn('menu-layout');
+            main.initGames();
+        });
 
-    $('.create-game').on('click', main.createGame);
+        $('.create-game').on('click', main.createGame);
 
-    client.addOnPutCallback(function (data) {
-        game.putGo(data.x, data.y, data.type, data.owner);
-    });
+        client.addOnPutCallback(function (data) {
+            game.putGo(data.x, data.y, data.type, data.owner);
+        });
 
-    $.getScript("src/platform_" + qs['platform'] + ".js", function () {
-        console.log(qs['platform'] + ' loaded');
+        client.addOnPlayerLeftCallback(function () {
+            console.log('leeeft!');
+        });
     });
 });

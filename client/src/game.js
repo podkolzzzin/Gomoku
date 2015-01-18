@@ -129,6 +129,10 @@ game.checkVictory = function () {
     var rtl = _hasDiagonalVictory(true, true) || _hasDiagonalVictory(false, true);
     var winner = vertical || horizontal || ltr || rtl;
 
+    if (winner) {
+        client.finishGame();
+    }
+
     if (winner === game.my_turn) {
         console.log('you win!');
     } else if (winner === getOppositeTurn(game.my_turn)) {

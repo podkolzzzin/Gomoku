@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Five in a Row</title>
+    <title>Пять в ряд</title>
+
+    <meta charset="utf8">
 
     <link href="style.css" rel="stylesheet">
 
@@ -13,16 +15,21 @@
     <script src="src/game.js"></script>
 </head>
 <body>
-<div class="menu-layout">
-    <div class="games-layout">
-        <div class="games"></div>
+<div class="page">
+    <div class="layout menu-layout">
+        <div class="identification-layout">
+            <h1>Пять в ряд</h1>
+        </div>
+        <div class="games-layout">
+            <div class="games"></div>
+        </div>
+        <div class="create-game-layout">
+            <button class="create-game">Create game</button>
+        </div>
     </div>
-    <div class="create-game-layout">
-        <button class="create-game">Create game</button>
+    <div class="layout game-layout">
+        <div class="game-field"></div>
     </div>
-</div>
-<div class="game-layout">
-    <div class="game-field"></div>
 </div>
 </body>
 </html>
