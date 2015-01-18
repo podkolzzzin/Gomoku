@@ -61,6 +61,7 @@ var client = {
 
     addGame: function (callback) {
         this.socket.emit("addGame", {id: this.id});
+        this.socket.on("joinGame", this.onJoinGame);
         this.on_game_added_callback = callback;
     },
 

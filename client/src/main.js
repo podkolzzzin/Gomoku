@@ -41,6 +41,7 @@ main.createGame = function () {
     });
 
     client.addOnJoinGameCallback(function (data) {
+        console.log('another player joined', data);
         game.initField();
     });
 };
