@@ -53,8 +53,8 @@ game.putGo = function (cx, cy, turn, user_id) {
     if (!cell.hasClass('engaged')) {
         cell
             .addClass('engaged')
-            .addClass(game.turn)
-            .data('turn', game.turn)
+            .addClass(turn)
+            .data('turn', turn)
             .data('owner', user_id);
     }
 
