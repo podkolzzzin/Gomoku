@@ -2,9 +2,17 @@
  * Created by podko_000 on 17.01.15.
  */
 
-var app = require('http').createServer(handler)
-var io = require('socket.io')(app);
 var fs = require('fs');
+//var crypto = require("crypto");
+//var cData = {
+//    cert: fs.readFileSync("/var/server.crt").toString(),
+//    key: fs.readFileSync("/var/private.key").toString()
+//};
+
+//var cred = crypto.createCredentials(cData);
+var app = require('http').createServer();
+//app.setSecure(cred);
+var io = require('socket.io')(app);
 
 app.listen(8080);
 
