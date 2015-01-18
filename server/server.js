@@ -11,6 +11,7 @@ var server = {
 
         this.io = io;
         io.on("connection", server.onConnection);
+        console.log("server started");
     },
 
     onConnection: function (socket) {
@@ -21,7 +22,7 @@ var server = {
         socket.on("joinGame", server.onJoinGame);
         socket.on("getGames", server.onGetGames);
         socket.emit("initial", {"id": server.clients.length - 1});
-        socket.emit("getGames", server.games);
+        socket.emit("getGames", server.lean(server.games));
 
     },
 
